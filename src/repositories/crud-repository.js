@@ -15,6 +15,7 @@ class CrudRepository {
         id: data,
       },
     });
+    console.log(response)
     if (!response) {
       throw new AppError("Not able to find the resource", StatusCodes.NOT_FOUND)
     }
@@ -38,6 +39,10 @@ class CrudRepository {
         id: id,
       },
     });
+    const length = response.filter(x => x).length;
+    if (!length) {
+      throw new AppError("Not able to find the resource", StatusCodes.NOT_FOUND)
+    }
     return response;
   }
 }
