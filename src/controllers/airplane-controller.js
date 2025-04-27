@@ -20,6 +20,9 @@ async function createAirplane(req, res) {
         return res.status(error.statusCode).json(ErrorResponse);
     }
 }
+/**
+ * GET : /airplanes
+ */
 async function getAirplanes(req, res) {
     try {
         const airplanes = await AirplaneService.getAirplanes();
@@ -30,6 +33,9 @@ async function getAirplanes(req, res) {
         return res.status(error.statusCode).json(ErrorResponse);
     }
 }
+/**
+ * GET : /airplanes/:id
+ */
 async function getAirplane(req, res) {
     try {
         const id = req.params.id;
@@ -41,4 +47,19 @@ async function getAirplane(req, res) {
         return res.status(error.statusCode).json(ErrorResponse);
     }
 }
-module.exports = { createAirplane, getAirplanes, getAirplane };
+/**
+ * DELETE : /airplanes/:id
+ * req-body {modeNumber: 'airbus320', capacity:200}
+ */
+async function destroyAirplane(req, res) {
+    try {
+        const id = req.params.id;
+        const response = await AirplaneService.destroyAirplane(id);
+        SuccessResponse.data = response;
+        return res.status(StatusCodes.OK).json(SuccessResponse);
+    } catch (error) {
+        ErrorResponse.error = error;
+        return res.status(error.statusCode).json(ErrorResponse);
+    }
+}
+module.exports = { createAirplane, getAirplanes, getAirplane, destroyAirplane };
