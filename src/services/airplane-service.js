@@ -18,4 +18,15 @@ async function createAirplane(data) {
         throw new AppError("Cannot create a new airplane object", StatusCodes.INTERNAL_SERVER_ERROR);
     }
 }
-module.exports = { createAirplane };
+
+async function getAirplanes() {
+    try {
+        const airplanes = await airplaneRepository.getAll();
+        console.log(airplanes);
+        return airplanes;
+    } catch (error) {
+        return new AppError("Cannot fetch data of the airplanes", StatusCodes.INTERNAL_SERVER_ERROR);
+    }
+}
+
+module.exports = { createAirplane, getAirplanes };
