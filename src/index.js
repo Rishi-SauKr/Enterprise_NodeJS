@@ -5,7 +5,7 @@ const apiRoutes = require("./routes");
 const { StatusCodes } = require("http-status-codes");
 const app = express();
 
-app.use(express.urlencoded({extended:false}));
+app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 

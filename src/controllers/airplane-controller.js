@@ -1,12 +1,12 @@
 const { response } = require("express");
-const {AirplaneService} = require("../services");
+const { AirplaneService } = require("../services");
 const { StatusCodes } = require("http-status-codes");
-const {SuccessResponse,ErrorResponse} = require("../utils/common");
+const { SuccessResponse, ErrorResponse } = require("../utils/common");
 /**
  * POST : /airplanes
  * req-body {modeNumber: 'airbus320', capacity:200}
  */
-async function createAirplane(req,res) {
+async function createAirplane(req, res) {
     try {
         console.log(req.body);
         const response = await AirplaneService.createAirplane({
@@ -20,4 +20,4 @@ async function createAirplane(req,res) {
         return res.status(error.statusCode).json(ErrorResponse);
     }
 }
-module.exports = {createAirplane};
+module.exports = { createAirplane };

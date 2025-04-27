@@ -9,12 +9,13 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      modelNumber: {allowNull: false,
+      modelNumber: {
+        allowNull: false,
         type: Sequelize.STRING
       },
       capacity: {
         type: Sequelize.INTEGER,
-        defaultValue:0,
+        defaultValue: 0,
       },
       createdAt: {
         allowNull: false,
