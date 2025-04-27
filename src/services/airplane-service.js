@@ -22,11 +22,19 @@ async function createAirplane(data) {
 async function getAirplanes() {
     try {
         const airplanes = await airplaneRepository.getAll();
-        console.log(airplanes);
         return airplanes;
     } catch (error) {
-        return new AppError("Cannot fetch data of the airplanes", StatusCodes.INTERNAL_SERVER_ERROR);
+        throw new AppError("Cannot fetch data of the airplanes", StatusCodes.INTERNAL_SERVER_ERROR);
     }
 }
-
-module.exports = { createAirplane, getAirplanes };
+async function getAirplane(id) {
+    try {
+        const airplane = await airplaneRepository.get(id);
+        return airplane;
+    } catch (error) {
+        if (error.statusCode == StatusCodes.NOT_FOUND)
+            throw new AppError(`The airplane with ID as ${id} is not present`, StatusCodes.NOT_FOUND);
+        throw new AppError(`Cannot fetch data of the airplane with ${id}`, StatusCodes.INTERNAL_SERVER_ERROR);
+    }
+}
+module.exports = { createAirplane, getAirplanes, getAirplane };
