@@ -5,7 +5,6 @@ const AppError = require("../utils/errors/app-error.js")
 
 async function createCity(data) {
     try {
-        console.log(data);
         const city = await cityRepository.create(data);
         console.log(city)
         return city;
@@ -20,7 +19,27 @@ async function createCity(data) {
         throw new AppError("Cannot create a new city object", StatusCodes.INTERNAL_SERVER_ERROR);
     }
 }
-
+async function destroyCity(id) {
+    try {
+        const response = await cityRepository.destroy(id);
+        return response;
+    } catch (error) {
+        if (error.statusCode == StatusCodes.NOT_FOUND)
+            throw new AppError(`The City with ID as ${id} to delete is not present`, StatusCodes.NOT_FOUND);
+        throw new AppError(`Cannot fetch data of the City with ${id}`, StatusCodes.INTERNAL_SERVER_ERROR);
+    }
+}
+async function updateCity(id, data) {
+    try {
+        const response = await cityRepository.update(id, data);
+        console.log(response);
+        return response;
+    } catch (error) {
+        if (error.statusCode == StatusCodes.NOT_FOUND)
+            throw new AppError(`The City with ID as ${id} to updated is not present`, StatusCodes.NOT_FOUND);
+        throw new AppError(`Cannot fetch data of the City with ${id}`, StatusCodes.INTERNAL_SERVER_ERROR);
+    }
+}
 module.exports = {
-    createCity
+    createCity, destroyCity, updateCity
 }
