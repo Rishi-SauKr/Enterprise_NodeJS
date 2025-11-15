@@ -18,6 +18,7 @@ app.listen(ServerConfig.PORT, async () => {
     console.log(
         `Successfully started the server on PORT : ${ServerConfig.PORT}`
     );
+
     // const { City, Airport } = require("./models");
     // const bengaluru = await City.findByPk(2);
     // console.log(bengaluru);
@@ -30,16 +31,17 @@ app.listen(ServerConfig.PORT, async () => {
     // const airportsInBlr = await bengaluru.getAirports();
     // console.log(airportsInBlr);
     /** This Errors out. */
-    // const hblAirport = await Airport.findByPk(7);
+    // const hblAirport = await Airport.findByPk(3);
     // console.log(hblAirport);
     // await bengaluru.removeAirport(hblAirport);
-
-
-    // const city = await City.findByPk(3);
+    /*
+        Tries to update cityId to null that gives error on both javascript level and database level.
+    */
+    // const city = await City.findByPk(5);
     // await city.createAirport({ name: 'Indore Airport', code: 'IND' })
     // await City.destroy({
     //     where: {
-    //         id: 3
+    //         id: 4
     //     }
     // })
     // Logger.info,Logger.error,Logger.warning
