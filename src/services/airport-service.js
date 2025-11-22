@@ -1,8 +1,6 @@
 const { StatusCodes } = require('http-status-codes');
-
 const { AirportRepository } = require('../repositories');
 const AppError = require('../utils/errors/app-error');
-
 
 const airportRepository = new AirportRepository();
 

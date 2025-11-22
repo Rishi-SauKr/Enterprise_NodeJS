@@ -1,9 +1,8 @@
-const { Sequelize } = require('sequelize');
-const CrudRepository = require('./crud-repository');
-const { Flight, Airplane, Airport, City } = require('../models');
-const db = require('../models');
-const { addRowLockOnFlights } = require('./queries');
-
+const { Sequelize } = require("sequelize");
+const CrudRepository = require("./crud-repository");
+const { Flight, Airplane, Airport, City } = require("../models");
+const db = require("../models");
+const { addRowLockOnFlights } = require("./queries");
 
 class FlightRepository extends CrudRepository {
     constructor() {
@@ -19,33 +18,42 @@ class FlightRepository extends CrudRepository {
                 {
                     model: Airplane,
                     required: true, // performs inner join instead of left-outer join i.e., will only be included in the result if you have matching records.
-                    as: 'airplaneDetail',
+                    as: "airplaneDetail",
                 },
                 {
                     model: Airport,
                     required: true,
-                    as: 'departureAirport',
+                    as: "departureAirport",
+                    // on field is necesaary if we are doing include on non-primary key field. e.g. code here.
                     on: {
-                        col1: Sequelize.where(Sequelize.col("Flight.departureAirportId"), "=", Sequelize.col("departureAirport.code"))
+                        col1: Sequelize.where(
+                            Sequelize.col("Flight.departureAirportId"),
+                            "=",
+                            Sequelize.col("departureAirport.code")
+                        ),
                     },
                     include: {
                         model: City,
-                        required: true
-                    }
+                        required: true,
+                    },
                 },
                 {
                     model: Airport,
                     required: true,
-                    as: 'arrivalAirport',
+                    as: "arrivalAirport",
                     on: {
-                        col1: Sequelize.where(Sequelize.col("Flight.arrivalAirportId"), "=", Sequelize.col("arrivalAirport.code"))
+                        col1: Sequelize.where(
+                            Sequelize.col("Flight.arrivalAirportId"),
+                            "=",
+                            Sequelize.col("arrivalAirport.code")
+                        ),
                     },
                     include: {
                         model: City,
-                        required: true
-                    }
-                }
-            ]
+                        required: true,
+                    },
+                },
+            ],
         });
         return response;
     }
@@ -60,9 +68,17 @@ class FlightRepository extends CrudRepository {
                 transaction,
             });
             if (+dec) {
-                await flight.decrement('totalSeats', { by: seats }, { transaction: transaction });
+                await flight.decrement(
+                    "totalSeats",
+                    { by: seats },
+                    { transaction: transaction }
+                );
             } else {
-                await flight.increment('totalSeats', { by: seats }, { transaction: transaction });
+                await flight.increment(
+                    "totalSeats",
+                    { by: seats },
+                    { transaction: transaction }
+                );
             }
             await transaction.commit();
             return flight;
@@ -70,7 +86,6 @@ class FlightRepository extends CrudRepository {
             await transaction.rollback();
             throw error;
         }
-
     }
 }
 

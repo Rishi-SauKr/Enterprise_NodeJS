@@ -40,7 +40,8 @@ class CrudRepository {
         id: id,
       },
     });
-
+    // Model.update() does NOT return the updated row.
+    // It returns [numberOfRowsUpdated].
     if (response[0] === 0) {
       throw new AppError("Not able to find the resource", StatusCodes.NOT_FOUND)
     }

@@ -1,5 +1,5 @@
-'use strict';
-const { Op } = require('sequelize');
+"use strict";
+const { Op } = require("sequelize");
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
@@ -11,19 +11,25 @@ module.exports = {
      *   name: 'John Doe',
      *   isBetaMember: false
      * }], {});
-    */
-    await queryInterface.bulkInsert('Airplanes', [{
-      modelNumber: 'AirBus A380',
-      capacity: 450,
-      createdAt: new Date(),
-      updatedAt: new Date()
-    }, {
-      modelNumber: 'Boeing 747 Max',
-      capacity: 900,
-      createdAt: new Date(),
-      updatedAt: new Date()
-    }], {});
-
+     */
+    await queryInterface.bulkInsert(
+      "Airplanes",
+      [
+        {
+          modelNumber: "AirBus A380",
+          capacity: 450,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          modelNumber: "Boeing 747 Max",
+          capacity: 900,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+      ],
+      {}
+    );
   },
 
   async down(queryInterface, Sequelize) {
@@ -33,6 +39,11 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
-    await queryInterface.bulkDelete('Airplanes', { [Op.or]: [{ modelNumber: 'AirBus A380' }, { modelNumber: 'Boeing 747 Max' }] });
-  }
+    await queryInterface.bulkDelete("Airplanes", {
+      [Op.or]: [
+        { modelNumber: "AirBus A380" },
+        { modelNumber: "Boeing 747 Max" },
+      ],
+    });
+  },
 };

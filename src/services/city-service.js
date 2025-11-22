@@ -6,7 +6,7 @@ const AppError = require("../utils/errors/app-error.js")
 async function createCity(data) {
     try {
         const city = await cityRepository.create(data);
-        console.log(city)
+        console.log(city);
         return city;
     } catch (error) {
         if (error.name == "SequelizeValidationError" || error.name == "SequelizeUniqueConstraintError") {

@@ -1,7 +1,5 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
+"use strict";
+const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class Airport extends Model {
     /**
@@ -11,27 +9,35 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      // Each Airport belongs to exactly one City.
       this.belongsTo(models.City, {
-        foreignKey: 'cityId', onDelete: 'CASCADE', onUpdate: 'CASCADE'
+        foreignKey: "cityId",
+        onDelete: "CASCADE",
+        onUpdate: "CASCADE",
       });
+      // An Airport can be the departure airport for many Flights.
       this.hasMany(models.Flight, {
-        foreignKey: 'departureAirportId',
-        onDelete: 'CASCADE'
+        foreignKey: "departureAirportId",
+        onDelete: "CASCADE",
       });
+      // An Airport can be the arrival airport for many Flights.
       this.hasMany(models.Flight, {
-        foreignKey: 'arrivalAirportId',
-        onDelete: 'CASCADE'
+        foreignKey: "arrivalAirportId",
+        onDelete: "CASCADE",
       });
     }
   }
-  Airport.init({
-    name: { type: DataTypes.STRING, allowNull: false, unique: true },
-    code: { type: DataTypes.STRING, allowNull: false, unique: true },
-    address: { type: DataTypes.STRING, unique: true },
-    cityId: { type: DataTypes.INTEGER, allowNull: false }
-  }, {
-    sequelize,
-    modelName: 'Airport',
-  });
+  Airport.init(
+    {
+      name: { type: DataTypes.STRING, allowNull: false, unique: true },
+      code: { type: DataTypes.STRING, allowNull: false, unique: true },
+      address: { type: DataTypes.STRING, unique: true },
+      cityId: { type: DataTypes.INTEGER, allowNull: false },
+    },
+    {
+      sequelize,
+      modelName: "Airport",
+    }
+  );
   return Airport;
 };

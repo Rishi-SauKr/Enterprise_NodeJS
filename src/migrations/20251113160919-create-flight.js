@@ -55,7 +55,7 @@ module.exports = {
       boardingGate: {
         type: Sequelize.STRING
       },
-      totalSeats: {
+      totalSeats: { // Total no. of remaining seats.
         type: Sequelize.INTEGER,
         allowNull: false
       },

@@ -21,7 +21,7 @@ app.listen(ServerConfig.PORT, async () => {
 
     // const { City, Airport } = require("./models");
     // const bengaluru = await City.findByPk(2);
-    // console.log(bengaluru);
+    // console.log(bengaluru);q\
     // const airport = await Airport.create({
     //     name: "Kempegowda Airport", code: 'BLR', cityId: 1
     // });
@@ -30,10 +30,12 @@ app.listen(ServerConfig.PORT, async () => {
     // const HubliAirport = await bengaluru.createAirport({ name: 'Bengaluru International Airport', code: 'HBL' });
     // const airportsInBlr = await bengaluru.getAirports();
     // console.log(airportsInBlr);
-    /** This Errors out. */
-    // const hblAirport = await Airport.findByPk(3);
-    // console.log(hblAirport);
-    // await bengaluru.removeAirport(hblAirport);
+    // This Errors out.  Airport.cityId cannot be null
+    /*
+    const hblAirport = await Airport.findByPk(3);
+    console.log(hblAirport);
+    await bengaluru.removeAirport(hblAirport);
+    */
     /*
         Tries to update cityId to null that gives error on both javascript level and database level.
     */
@@ -44,6 +46,7 @@ app.listen(ServerConfig.PORT, async () => {
     //         id: 4
     //     }
     // })
+
     // Logger.info,Logger.error,Logger.warning
     Logger.info("Sucessfully started server", {});
 });

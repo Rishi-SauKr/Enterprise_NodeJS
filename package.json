@@ -1,12 +1,12 @@
 {
-    "name": "backend-nodejs",
+    "name": "flight-service",
     "version": "1.0.0",
     "main": "index.js",
     "scripts": {
         "dev": "npx nodemon src/index.js"
     },
     "keywords": [],
-    "author": "",
+    "author": "Saurabh",
     "license": "ISC",
     "description": "",
     "dependencies": {
